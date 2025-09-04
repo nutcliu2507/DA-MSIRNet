@@ -25,7 +25,7 @@ Basic training command (replace {} with your settings):
 ```
 python train.py --name {your_name} --img_file {your_image_path} --niter {your_niter} --mask_type [2,4] --batchSize 4 --lr 1e-4 --gpu_ids 0 --no_augment --no_flip --no_rotation
 ```
-Default Settings:
+Experimental Settings:
 - Batch Size: 4
 - Optimizer: AdamW (β1 = 0.5, β2 = 0.9)
 - Learning Rate: 1e-4
@@ -53,16 +53,6 @@ To continue training, use the same --name and add --continue_train:
 python test.py --name {your_name} --checkpoints_dir ./checkpoints/ --gpu_ids 0 --img_file {your_image_path} --mask_file {your_mask_path} --batchSize 1 --results_dir {your_image_result_path} --no_shuffle
 ```
 The option --no_shuffle can be used to keep a fixed testing order for reproducibility.
-
----
-
-## Experimental Settings (Summary)
-- Hardware: Single RTX 3090
-- Training Parameters: Batch Size = 4
-- Optimizer = AdamW (β1=0.5, β2=0.9)
-- LR = 1e-4
-- Input Size: 256 × 256
-
 ---
 
 ## License
