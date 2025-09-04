@@ -58,8 +58,9 @@ The option --no_shuffle can be used to keep a fixed testing order for reproducib
 
 ## Experimental Settings (Summary)
 - Hardware: Single RTX 3090
-- Training Parameters: Batch Size = 4; Optimizer = AdamW (β1=0.5, β2=0.9); LR = 1e-4
-- Training Epochs: CelebA-HQ = 100; Places2 = 4
+- Training Parameters: Batch Size = 4
+- Optimizer = AdamW (β1=0.5, β2=0.9)
+- LR = 1e-4
 - Input Size: 256 × 256
 
 ---
