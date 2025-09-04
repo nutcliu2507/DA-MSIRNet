@@ -12,9 +12,9 @@ It is recommended to use a virtual environment.
 
 ## Visualization (Visdom)
 Before training, start the Visdom server (default port: 8097):
-
+```
 python -m visdom.server
-
+```
 Once launched, you can monitor training at:  
 http://localhost:8097
 
@@ -22,9 +22,9 @@ http://localhost:8097
 
 ## Training
 Basic training command (replace {} with your settings):
-
+```
 python train.py --name {your_name} --img_file {your_image_path} --niter {your_niter} --mask_type [2,4] --batchSize 4 --lr 1e-4 --gpu_ids 0 --no_augment --no_flip --no_rotation
-
+```
 Default Settings:
 - Batch Size: 4
 - Optimizer: AdamW (β1 = 0.5, β2 = 0.9)
@@ -49,8 +49,9 @@ To continue training, use the same --name and add --continue_train:
 ---
 
 ## Testing / Inference
+```
 python test.py --name {your_name} --checkpoints_dir ./checkpoints/ --gpu_ids 0 --img_file {your_image_path} --mask_file {your_mask_path} --batchSize 1 --results_dir {your_image_result_path} --no_shuffle
-
+```
 The option --no_shuffle can be used to keep a fixed testing order for reproducibility.
 
 ---
