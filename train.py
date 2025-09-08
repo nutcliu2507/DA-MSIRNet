@@ -22,7 +22,7 @@ if __name__ == '__main__':
     max_iteration = opt.niter+opt.niter_decay
     epoch = 0
     total_iteration = opt.iter_count
-    base_loss = 0
+    base_loss = 1.5
     # training process
     while(keep_training):
         epoch_start_time = time.time()
@@ -46,9 +46,9 @@ if __name__ == '__main__':
                 t = (time.time() - iter_start_time) / opt.batchSize
                 message,totalG_loss = visualizer.print_current_errors(epoch, total_iteration, losses, t)
                 losses['totalG_loss']=totalG_loss
-                if base_loss<totalG_loss:
+                if base_loss>totalG_loss:
                     base_loss=totalG_loss
-                    model.save_networks('baseloss')
+                    model.save_networks(f'baseloss_{epoch}_{base_loss:.4f}')
                 tqdm.write(message)
                 if opt.display_id > 0:
                     visualizer.plot_current_errors(total_iteration, losses)

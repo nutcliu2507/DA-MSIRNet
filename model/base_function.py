@@ -104,7 +104,7 @@ def print_network(net):
 
     macs = flops.total() / 2  # FLOPs 轉換為 MACs
 
-    print(net)
+    print(net.__class__.__name__)
     print('Total number of parameters: %.3f M' % (num_params / 1e6))
     print('MACs: %.3f GMACs' % (macs / 1e9))  # 轉換為 GMACs（10^9）
 

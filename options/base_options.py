@@ -22,18 +22,12 @@ class BaseOptions():
         parser.add_argument('--name', type=str, default='pl2_netum3R', help='name of the experiment.')
         parser.add_argument('--model', type=str, default='pluralistic', help='name of the model type. [pluralistic]')
         parser.add_argument('--mask_type', type=parse_mask_type, default=[3],
-                            help='mask type, 0: center mask, 1:random regular mask, '
-                            '2: random irregular mask. 3: external irregular mask. [3],[2,4]')
+                            help='mask type, 0: center mask, 1: random regular mask, '
+                            '2: random irregular mask, 3: external irregular mask, 4: random freefrom mask')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are save here')
         parser.add_argument('--which_iter', type=str, default='latest', help='which iterations to load')
         parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0, 1, 2 use -1 for CPU')
 
-        # data pattern define  /data/dy/data/paris/eval/
-        # /data/dy/data/paris/train/paris_train_original/
-        #  /data/dy/data/test_mask/  /data/dy/data/paris/val/paris_eval_gt/
-        # /data/dy/data/celeba256/  /data/dy/data/celebat1000/
-        # /data/dy/data/place_train/
-        # /data/dy/data/p2test  /data/dy/data/minip2/
         parser.add_argument('--img_file', type=str, default='/home/hwl/hwl/datasets/celebaHQ/celeba256', help='training and testing dataset')
         parser.add_argument('--mask_file', type=str, default=r'C:\Users\2507\Desktop\spa-former-main\datasets\mask\test_mask\mask\testing_mask_dataset', help='load test mask')
         parser.add_argument('--loadSize', type=int, default=[266, 266], help='scale images to this size')

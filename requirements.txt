@@ -1,0 +1,16 @@
+dominate==2.6.0
+einops==0.4.1
+fvcore==0.1.5.post20220512
+imageio==2.9.0
+importlib-metadata==4.0.1
+lpips==0.1.4
+matplotlib==3.3.4
+openai-clip==1.0.1
+opencv-python==4.5.1.48
+ptflops==0.6.8
+PyQt5-sip==12.15.0
+scikit-image==0.17.2
+scikit-learn==0.24.1
+six==1.15.0
+tqdm==4.60.0
+visdom==0.1.8.9

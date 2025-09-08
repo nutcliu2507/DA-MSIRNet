@@ -1,8 +1,11 @@
 import torch
 from .base_model import BaseModel
 from . import base_function, external_function, network
-from . import netU_da_msirnet
+from . import da_msirnet
 from util import task
+import cv2
+import numpy as np
+from torch.cuda import Event
 import itertools
 from model.loss import AdversarialLoss, PerceptualLoss, StyleLoss,SSIMLoss
 
@@ -32,9 +35,8 @@ class Pluralistic(BaseModel):
         self.loss_names = ['l1_g', 'ad_g', 'img_d', 'per', 'sty','ssim']
         self.visual_names = ['img_m', 'img_truth', 'img_out', 'img_g']
         self.model_names = ['G', 'D',]
-
         # define the inpainting model
-        self.net_G = netU_da_msirnet.define_g(gpu_ids=opt.gpu_ids)    #paper use our
+        self.net_G = da_msirnet.define_g(gpu_ids=opt.gpu_ids)    #paper use our
 
         # define the discriminator model
         self.net_D = network.define_d(gpu_ids=opt.gpu_ids)
@@ -86,16 +88,24 @@ class Pluralistic(BaseModel):
     def test(self):
         """Forward function used in test time"""
         # save the groundtruth and masked image
+        starter, ender = Event(enable_timing=True), Event(enable_timing=True)
         self.save_results(self.img_truth, data_name='truth')
         self.save_results(self.img_m, data_name='mask')
-
+        # vals=torch.unique(self.mask)
+        # background = vals.max()
+        # binary = (self.mask != background).int()*2-1
+        # self.save_results(binary, data_name='mask_t')
         self.net_G.eval()
 
+        starter.record()
         self.img_g = self.net_G(self.img_m, self.mask)
+        ender.record()
+        torch.cuda.synchronize()
 
         self.img_out = self.img_g * (1 - self.mask) + self.img_truth * self.mask
         #self.forward()
         self.save_results(self.img_out, data_name='out')
+        return starter.elapsed_time(ender) / 1000  # ms→s
 
 
     def forward(self):

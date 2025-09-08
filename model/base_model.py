@@ -140,7 +140,7 @@ class BaseModel():
         """Save the training or testing results to disk"""
         img_paths = self.get_image_paths()
         for i in range(save_data.size(0)):
-            print('process image ...... %s' % img_paths[i])
+            # print('process image ...... %s' % img_paths[i])
             short_path = ntpath.basename(img_paths[i])  # get image path
             name = os.path.splitext(short_path)[0]
             if type(score) == type(None):

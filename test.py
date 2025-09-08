@@ -1,10 +1,13 @@
 from options import test_options
 from dataloader import data_loader
 from model import create_model
-from util import visualizer
 from itertools import islice
+from torch.cuda import Event
+import torch
+from tqdm import tqdm
+import os
 
-if __name__=='__main__':
+if __name__ == '__main__':
     # get testing options
     opt = test_options.TestOptions().parse()
     # creat a dataset
@@ -15,13 +18,22 @@ if __name__=='__main__':
     model = create_model(opt)
     model.eval()
     # create a visualizer
-    # visualizer = visualizer.Visualizer(opt)
 
-    if(opt.how_many!=0):
-        for i, data in enumerate(islice(dataset, opt.how_many)):
-            model.set_input(data)
-            model.test()
-    else:
-        for i, data in enumerate(dataset):
-            model.set_input(data)
-            model.test()
+    times = []
+    total_iters = opt.how_many if opt.how_many != 0 else len(dataset)
+    iterator = islice(dataset, opt.how_many) if opt.how_many != 0 else dataset
+
+    for i, data in enumerate(tqdm(iterator, total=total_iters), 1):
+
+        model.set_input(data)
+        t=model.test()
+
+        times.append(t)
+    if times:
+        with open(os.path.join(opt.results_dir, 'result.txt'), 'w') as f:
+            avg_batch = sum(times) / len(times)
+            avg_image = avg_batch / opt.batchSize
+            print(f'平均Inference用時:{avg_image:.4f}s')
+            fps = 1 / avg_image  # 每秒可處理張數
+            print(f'InferenceFPS:{fps:.2f}張/s')
+            f.write(f'Inference Time:{avg_image} FPS:{fps}\n')

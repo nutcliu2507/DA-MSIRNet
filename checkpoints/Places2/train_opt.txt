@@ -1,0 +1,46 @@
+--------------Options--------------
+batchSize: 4
+beta1: 0.5
+beta2: 0.9
+checkpoints_dir: ./checkpoints
+continue_train: True
+display_freq: 100
+display_id: 4
+display_port: 8097
+display_single_pane_ncols: 0
+display_winsize: 256
+fineSize: [256, 256]
+gan_mode: lsgan
+gpu_ids: 0
+img_file: C:\Users\2507\Desktop\dataset\places2\train
+isTrain: True
+iter_count: 1
+lambda_g: 0.1
+lambda_l1: 1
+lambda_per: 1
+lambda_ssim: 1
+lambda_sty: 250
+loadSize: [266, 266]
+lr: 1e-05
+lr_policy: lambda
+mask_file: C:\Users\2507\Desktop\spa-former-main\datasets\mask\test_mask\mask\testing_mask_dataset
+mask_type: [2, 4]
+model: pluralistic
+nThreads: 6
+name: Place_MSIR_CAA_SSIM
+niter: 420000
+niter_decay: 0
+no_augment: True
+no_flip: True
+no_html: False
+no_rotation: True
+no_shuffle: False
+output_scale: 4
+print_freq: 100
+resize_or_crop: resize_and_crop
+save_iters_freq: 10000
+save_latest_freq: 1000
+train_paths: two
+weight_decay: 0.0
+which_iter: latest
+----------------End----------------
